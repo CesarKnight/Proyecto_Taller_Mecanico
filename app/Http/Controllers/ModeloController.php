@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Marca;
+use App\Models\Modelo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\Rule;
 
 class ModeloController extends Controller
 {
     public function index()
     {
-        $url = env('URL_SERVER_API', 'http://127.0.0.1:8000');
-        $response = Http::get($url.'/modelo');
-        $data = $response->json();
-
+        $data = Modelo::all();
         return view('dashboard.modelos.index', compact('data'));
     }
 
@@ -21,9 +21,7 @@ class ModeloController extends Controller
      */
     public function create()
     {
-        $url = env('URL_SERVER_API', 'http://127.0.0.1:8000');
-        $response = Http::get($url.'/marca');
-        $marcas = $response->json();
+        $marcas = Marca::all();
         return view('dashboard.modelos.create', compact('marcas'));
     }
 
@@ -34,26 +32,18 @@ class ModeloController extends Controller
     {
         // Validación de datos
         $request->validate([
-            'nombre' => 'required|string|min:2|max:100',
+            'nombre' => 'required|unique:modelos',
             'marca_id' => 'required',
         ]);
-        
-        // dd($request->input('nombre'), $request->input('marca_id'));
 
-        $url = env('URL_SERVER_API', 'http://127.0.0.1:8000');
-        $response = Http::post($url.'/modelo', [
-            'nombre' => $request->input('nombre'),
-            'marca_id' => $request->input('marca_id'),
-        ]);
-        // dd($response);
-        $result = $response->json();
-        if ($result && $result['status']) {
-            alert()->success('¡Guardado!','El modelo ha sido guardado exitosamente.');
-            return redirect()->route('modelos.index');
-        } else {
-            alert()->error('Oops...','Ha ocurrido un error. Por favor, intenta nuevamente.');
-            return redirect()->route('modelos.create');
-        }
+        // Crear un nuevo puesto relacionado con el usuario
+        $modelo = new Modelo();
+        $modelo->nombre = $request->nombre;
+        $modelo->marca_id = $request->marca_id;
+        $modelo->save();
+
+        alert()->success('¡Guardado!','El modelo ha sido guardado exitosamente.');
+        return redirect()->route('modelos.index');
     }
 
     /**
@@ -67,17 +57,10 @@ class ModeloController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($modelo)
+    public function edit($id)
     {
-        
-        $url = env('URL_SERVER_API', 'http://127.0.0.1:8000');
-        $response = Http::get($url.'/marca');
-        $marcas = $response->json();
-        
-        $response = Http::get($url.'/modelo/'.$modelo);
-        // dd($response);
-        
-        $modelo = $response->json();
+        $modelo = Modelo::find($id);
+        $marcas = Marca::all();
         return view('dashboard.modelos.edit', compact('modelo', 'marcas'));
     }
 
@@ -86,35 +69,50 @@ class ModeloController extends Controller
      */
     public function update(Request $request)
     {
+        $modelo = Modelo::find($request->id);
+
+        if (!$modelo) {
+            // Si no se encuentra el modelo, devuelve una respuesta de error
+            alert()->error('Oops...','Ha ocurrido un error. Por favor, intenta nuevamente.');
+            return redirect()->route('modelos.edit', $request->id);
+        }
+
         // Validación de datos
         $request->validate([
-            'nombre' => 'required|string|min:2|max:100',
+            'nombre' => [
+                'required',
+                Rule::unique('modelos', 'nombre')->ignore($modelo->id),
+            ],
             'marca_id' => 'required',
         ]);
-        
-        $id = $request->id;
 
-        $url = env('URL_SERVER_API', 'http://127.0.0.1:8000');
-        $response = Http::put($url.'/modelo/'.$id, [
-            'nombre' => $request->input('nombre'),
-            'marca_id' => $request->input('marca_id'),
-        ]);
+        // Actualiza los datos del marca con los valores del formulario
+        $modelo->nombre = $request->nombre;
+        $modelo->marca_id = $request->marca_id;
+        $modelo->save();
 
-        $result = $response->json();
-        if ($result && $result['status'] ) {
-            alert()->success('¡Actualizado!','El cliente ha sido actualizado exitosamente.');
-            return redirect()->route('modelos.index');
-        } else {
-            alert()->error('Oops...','Ha ocurrido un error. Por favor, intenta nuevamente.');
-            return redirect()->route('modelos.edit', $id);
-        }
+        alert()->success('¡Actualizado!','El modelo ha sido actualizado exitosamente.');
+        return redirect()->route('modelos.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( $id)
     {
-        //
+        // Encuentra el modelo por su ID
+        $modelo = Modelo::find($id);
+
+        if (!$modelo) {
+            // Si no se encuentra el empleado, devuelve una respuesta de error
+            alert()->error('Oops...','Ha ocurrido un error. Por favor, intenta nuevamente.');
+            return redirect()->route('modelos.index');
+        }
+
+        // Elimina el empleado
+        $modelo->delete();
+
+        alert()->success('¡Eliminado!','El modelo ha sido eliminado exitosamente.');
+        return redirect()->route('modelos.index');
     }
 }

@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PermisosController extends Controller
+class RolController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard.permisos.index');
+        return view('dashboard.roles.index');
     }
 
     /**

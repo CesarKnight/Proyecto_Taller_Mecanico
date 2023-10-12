@@ -13,16 +13,35 @@
             </li>
 
             <li>
-                <a href="{{ route('clientes.index') }}">
+                <a href="{{route('usuarios.index')}}">
                     <i class="fas fa-user-friends"></i>
-                    <span> Clientes </span>
+                    <span> Usuarios </span>
                 </a>
             </li>
 
             <li>
-                <a href="{{route('usuarios.index')}}">
+                <a href="javascript: void(0);">
+                    <i class="fas fa-key"></i>
+                    <span> Roles y Permisos </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="{{route('roles.index')}}">Roles</a>
+                    </li>
+                    <li>
+                        <a href="{{route('permisos.index')}}">Permisos</a>
+                    </li>
+                    <li>
+                        <a href="#">Asignar Permisos</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="{{ route('clientes.index') }}">
                     <i class="fas fa-user-friends"></i>
-                    <span> Usuarios </span>
+                    <span> Clientes </span>
                 </a>
             </li>
 
@@ -56,25 +75,6 @@
                     </li>
                     <li>
                         <a href="{{ route('modelos.index') }}">Modelos</a>
-                    </li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="javascript: void(0);">
-                    <i class="fas fa-key"></i>
-                    <span> Roles y Permisos </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <ul class="nav-second-level" aria-expanded="false">
-                    <li>
-                        <a href="{{route('roles.index')}}">Roles</a>
-                    </li>
-                    <li>
-                        <a href="{{route('permisos.index')}}">Permisos</a>
-                    </li>
-                    <li>
-                        <a href="#">Asignar Permisos</a>
                     </li>
                 </ul>
             </li>

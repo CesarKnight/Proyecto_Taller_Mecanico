@@ -102,7 +102,7 @@
                     @php
                         $user = Auth::user();
                         if (Auth::check() && $user->empleado) {
-                            $nombre = $user->empleado->nombres .' '. $user->empleado->apellidos;
+                            $nombre = $user->empleado->nombre .' '. $user->empleado->apellido;
                         } else {
                             $nombre = 'Admin';
                         }
@@ -133,14 +133,13 @@
 
                 <div class="dropdown-divider"></div>
 
-                <!-- item-->
-                {{-- <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('auth.logout') }}">
                     @csrf
                     <a href="javascript:void(0);" class="dropdown-item notify-item" onclick="this.closest('form').submit()">
                         <i class="fe-log-out"></i>
                         <span>Cerrar Sesión</span>
                     </a>
-                </form> --}}
+                </form>
 
             </div>
         </li>

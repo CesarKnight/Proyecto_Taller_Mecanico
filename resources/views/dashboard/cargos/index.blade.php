@@ -1,6 +1,6 @@
 <x-layouts.app>
 
-    <x-layouts.content title="Clientes" subtitle="" name="Clientes">
+    <x-layouts.content title="Cargo" subtitle="" name="Cargo">
 
         <div class="row">
             <div class="col-12">
@@ -8,9 +8,9 @@
                 <div class="mb-2 d-flex justify-content-between">
 
                     <div class="form-group">
-                        <a href="{{ route('clientes.create') }}" class="btn btn-primary waves-effect waves-light">
+                        <a href="{{ route('cargo.create') }}" class="btn btn-primary waves-effect waves-light">
                             <i class="fas fa-plus-circle"></i>&nbsp;
-                            Nuevo Cliente
+                            Nuevo Cargo
                         </a>
                     </div>
 
@@ -19,33 +19,27 @@
                 <div class="card-box">
 
                     <div class="table-responsive">
-                        <table id="table-clientes" class="table table-hover mb-0 dts">
+                        <table id="table-cargo" class="table table-hover mb-0 dts">
                             <thead class="bg-dark text-center text-white text-nowrap">
                                 <tr style="cursor: pointer">
-                                    <th scope="col">CI</th>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Nombre</th>
-                                    <th scope="col">Apellido</th>
-                                    <th scope="col">Dirección</th>
-                                    <th scope="col">Telefono</th>
-                                    <th scope="col">Género</th>
+                                    <th scope="col">Descripcion</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $cliente)
+                                @foreach ($data as $cargo)
                                 <tr class="text-nowrap text-center">
-                                    <th scope="row" class="align-middle">{{ $cliente->ci }}</th>
-                                    <td class="align-middle">{{ $cliente->nombre }}</td>
-                                    <td class="align-middle">{{ $cliente->apellido }}</td>
-                                    <td class="align-middle">{{ $cliente->direccion }}</td>
-                                    <td class="align-middle">{{ $cliente->telefono }}</td>
-                                    <td class="align-middle">{{ $cliente->genero }}</td>
+                                    <th scope="row" class="align-middle">{{ $cargo->id }}</th>
+                                    <td class="align-middle">{{ $cargo->nombre }}</td>
+                                    <td class="align-middle">{{ $cargo->descripcion }}</td>
                                     <td class="align-middle text-nowrap">
                                         <button type="button" title="Ver" class="btn btn-sm btn-warning"><i
                                                 class="fas fa-eye"></i></button>
-                                        <a href="{{ route('clientes.edit', $cliente->id) }}" title="Editar" class="btn btn-sm btn-primary"><i
+                                        <a href="{{ route('cargo.edit', $cargo->id) }}" title="Editar" class="btn btn-sm btn-primary"><i
                                                 class="fas fa-edit"></i></a>
-                                        <a href="{{ route('clientes.delete', $cliente->id) }}" title="Eliminar" class="btn btn-sm btn-danger" data-confirm-delete="true"><i
+                                        <a href="{{ route('cargo.delete', $cargo->id) }}" title="Eliminar" class="btn btn-sm btn-danger" data-confirm-delete="true"><i
                                                 class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
