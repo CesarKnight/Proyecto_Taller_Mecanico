@@ -5,16 +5,26 @@
         <div class="row">
             <div class="col-12">
 
-                {{-- <div class="mb-2 d-flex justify-content-between">
+                <div class="mb-2 d-flex justify-content-between">
 
                     <div class="form-group">
+                        <select class="form-control mr-1" >
+                            <option value="">Seleccionar Rol</option>
+                            @foreach ($roles as $rol)
+                                <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                            @endforeach
+                        </select>
                         <a href="{{ route('roles.create') }}" class="btn btn-primary waves-effect waves-light">
-                            <i class="fas fa-plus-circle"></i>&nbsp;
-                            Nuevo Rol
+                            <i class="fas fa-check-circle"></i>&nbsp;
+                                Sincronizar todos
+                        </a>
+                        <a href="{{ route('roles.create') }}" class="btn btn-primary waves-effect waves-light">
+                            <i class="fas fa-times-circle"></i>&nbsp;
+                                Revocar todos
                         </a>
                     </div>
 
-                </div> --}}
+                </div>
 
                 <div class="card-box">
 

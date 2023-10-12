@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,6 +17,7 @@ class Usuario extends Authenticatable
     protected $fillable = [
         'email',
         'password',
+        'rol_id',
     ];
 
     protected $hidden = [
@@ -34,8 +36,12 @@ class Usuario extends Authenticatable
         return $this->HasOne(Empleado::class, 'usuario_id');
     }
 
-    public function roles() {
-        return $this->belongsToMany(Rol::class, 'rol_usuario', 'usuario_id', 'rol_id');
+    // public function roles() {
+    //     return $this->belongsToMany(Rol::class, 'rol_usuario', 'usuario_id', 'rol_id');
+    // }
+
+    public function rol(): BelongsTo {
+        return $this->belongsTo(Rol::class, 'rol_id');
     }
 
 }

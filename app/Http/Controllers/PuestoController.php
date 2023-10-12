@@ -38,7 +38,7 @@ class PuestoController extends Controller
     {
         // Validación de datos
         $request->validate([
-            'nombre' => 'required|unique:',
+            'nombre' => 'required|unique:puestos',
             'descripcion' => 'required|string|min:2|max:100',
         ]);
 
@@ -58,7 +58,7 @@ class PuestoController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**
@@ -67,7 +67,7 @@ class PuestoController extends Controller
     public function update(Request $request)
     {
         $puesto = Puesto::find($request->id);
-        
+
         // Validación de datos
         $request->validate([
             'nombre' => [

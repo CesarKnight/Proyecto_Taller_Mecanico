@@ -79,7 +79,19 @@ Route::get('/dashboard/vehiculos/delete/{id}', [VehiculoController::class, 'dest
 Route::post('/dashboard/vehiculos/update/{id}', [VehiculoController::class, 'update'])->name('vehiculos.update');
 
 Route::get('/dashboard/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+Route::get('/dashboard/usuarios/edit/{id}', [UsuarioController::class, 'edit'])->name('usuarios.edit');
+Route::get('/dashboard/usuarios/delete/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.delete');
+Route::post('/dashboard/usuarios/update/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
+
+
 Route::get('/dashboard/roles', [RolController::class, 'index'])->name('roles.index');
+Route::get('/dashboard/roles/edit/{id}', [RolController::class, 'edit'])->name('roles.edit');
+Route::get('/dashboard/roles/create', [RolController::class, 'create'])->name('roles.create');
+Route::post('/dashboard/roles', [RolController::class, 'store'])->name('roles.store');
+Route::get('/dashboard/roles/delete/{id}', [RolController::class, 'destroy'])->name('roles.delete');
+Route::post('/dashboard/roles/update/{id}', [RolController::class, 'update'])->name('roles.update');
+
 Route::get('/dashboard/permisos', [PermisoController::class, 'index'])->name('permisos.index');
+// Route::post('/dashboard/asignar-permisos', [PermisoController::class, 'asignar'])->name('permisos.asignar');
 
 });

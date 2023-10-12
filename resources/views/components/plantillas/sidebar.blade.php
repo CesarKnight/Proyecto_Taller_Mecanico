@@ -32,9 +32,9 @@
                     <li>
                         <a href="{{route('permisos.index')}}">Permisos</a>
                     </li>
-                    <li>
-                        <a href="#">Asignar Permisos</a>
-                    </li>
+                    {{-- <li>
+                        <a href="{{ route('permisos.asignar') }}">Asignar Permisos</a>
+                    </li> --}}
                 </ul>
             </li>
 

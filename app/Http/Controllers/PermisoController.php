@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permiso;
+use App\Models\Rol;
 use Illuminate\Http\Request;
 
 class PermisoController extends Controller
@@ -11,8 +13,11 @@ class PermisoController extends Controller
      */
     public function index()
     {
-        return view('dashboard.permisos.index');
+        $data = Permiso::all();
+        $roles = Rol::all();
+        return view('dashboard.permisos.index', compact('data'));
     }
+
 
     /**
      * Show the form for creating a new resource.
