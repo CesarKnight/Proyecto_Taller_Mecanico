@@ -66,7 +66,8 @@ class EmpleadoController extends Controller
         // Crea el usuario con la contraseña determinada
         $user = Usuario::create([
             'email' => $request->email,
-            'password' => $password
+            'password' => $password,
+            'rol_id' => 1
         ]);
 
         // Verificar que el usuario se haya creado correctamente
