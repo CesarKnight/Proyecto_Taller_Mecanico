@@ -1,0 +1,23 @@
+
+DB_CONNECTION=pgsql
+DB_HOST=basedatos-taller.crcue1acbvsj.us-east-2.rds.amazonaws.com
+DB_PORT=5432
+DB_DATABASE=BD-taller
+DB_SCHEMA=BD-taller
+DB_USERNAME=TallerAdmin
+DB_PASSWORD=tallerbaljeet
+
+// se necesita eso para conectarse directo a la base de datoss
+
+
+// para ejecutar con postgres se debe eliminar los ; en las siguientes lineas del php.ini de apache
+;extension = pgsql
+;extension = algo de pgsql
+
+//ruta en el servidor es etc/php/8.1/apache2/php.ini
+
+sudo nano /etc/apache2/sites-enabled/000-default.conf
+
+//ruta para modificar el root de la pagina
+
+sudo apt-get install php-pgsql
